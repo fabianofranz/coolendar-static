@@ -6,10 +6,15 @@
 		<title>coolendar</title>
 		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 		<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
-		<link rel="stylesheet" href="css/app.css">
-		<link rel="shortcut icon" xhref="favicon.ico" type="image/x-icon">
 
-	<%@ include file="../css-minified.jsp" %>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<link rel="stylesheet" href="css/tipTip.css">
+		<link rel="stylesheet" href="css/fonts.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/media.css">
+
+		<link rel="shortcut icon" xhref="favicon.ico" type="image/x-icon">
 
 		<script type="text/javascript">
 			var timezone = "America/Sao_Paulo";
@@ -17,199 +22,203 @@
 			var preferencesTimeFormat = "HH:mm";
 		</script>
 
-	<%@ include file="../js-minified.jsp" %>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			clock.format = "${account.preferences.timeFormat12 ? 'hh:mm aa' : 'HH:mm'}";
-			clock.start();
-			<c:if test="${param.id != null && param.notify == null}">
-				scrollToPlan("${param.id}");
-				editPlan("${param.id}");
-			</c:if>
-			<c:if test="${param.notify != null}">
-				notify("${param.notify}");
-			</c:if>
-		});
-	</script>
-	<!--[if IE]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+		<script type="text/javascript" src="js/jquery-1.6.1.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.tools.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/soyutils.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/templates.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/timezone.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.autofill.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/date.format.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.tipTip.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.address-1.3.1.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/combobox.js" charset="utf-8"></script>
+		<script type="text/javascript" src="jquery.notify.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/functions.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/objects.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/main.js" charset="utf-8"></script>
 
-</head>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				clock.format = "HH:mm";
+				clock.start();
+			});
+		</script>
+	</head>
 
-<body class="theme default">
+	<body class="theme default">
 
-	<div id="page">
+		<div id="page">
 
-		<header id="top">
+			<header id="top">
 
-			<h1>coolendar</h1>
+				<h1>coolendar</h1>
 
-			<time id="clock">
-				<span class="date" >${u:formatDate(now, 'MMMM dd', account.preferences.timezone)}</span>,
-				<span class="time">${u:lowerCase(u:formatDate(now, account.preferences.timeFormat, account.preferences.timezone))}</span>
-				<br />
-				<span class="timezone">${u:userFriendlyTimezone(account.preferences.timezone)}</span>
-			</time>
+				<time id="clock">
+					<span class="date">${u:formatDate(now, 'MMMM dd', account.preferences.timezone)}</span>,
+					<span class="time">${u:lowerCase(u:formatDate(now, account.preferences.timeFormat, account.preferences.timezone))}</span>
+					<br />
+					<span class="timezone">${u:userFriendlyTimezone(account.preferences.timezone)}</span>
+				</time>
 
-			<nav>
-				<ul class="options">
-					<!-- <li class="option help">
-						<a href="#" class="help" title="<i:message key="help.link.title" />"><i:message key="help" /></a>
-					</li> -->
-					<li class="option account">
-						<span>${fn:replace(account.email, "@gmail.com", "")}</span>
-						<span class="arrow">▾</span>
-						<div id="preferences-menu">
-							<p class="first">Preferences</p>
-						    <a href="#preferences-date-time" id="preferences-date-time-link" rel="#preferences-date-time" class="option">date and time preferences</a>
-						    <a href="#preferences-account" id="preferences-account-link" rel="#preferences-account" class="option">account preferences</a>
-						    <a href="#preferences-delete-account" id="preferences-delete-account-link" rel="#preferences-delete-account" class="option">delete my account</a>
-							<p>Apps</p>
-							<a href="http://market.android.com/details?id=com.fingerson.android.coolendar" target="_blank" class="option">Android App</a>
-							<a href="http://itunes.apple.com/us/app/coolendar/id434828509?mt=8&ls=1" target="_blank" class="option">iPhone App</a>
-							<a href="gtalk:chat?jid=coolendar@appspot.com" class="option">Google Talk App</a>
-							<a href="mailto:robot@coolendar.com?subject=help" class="option">Email App</a>
-							<a href="http://kindle.coolendar.com" target="_blank" class="option">Kindle Web App</a>
-							<p>Sync</p>
-						    <a href="http://www.google.com/calendar/render?cid=http%3A%2F%2Fwww.coolendar.com%2Fical%2F${account.token}.ics" target="_blank" class="option">Google Calendar</a>
-						    <a href="webcal://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Apple iCal</a>
-						    <a href="http://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Microsoft Oultook</a>
-						    <a href="http://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Other (ICS)</a>
-							<p>Say hi!</p>
-						    <a href="http://twitter.com/coolendar" target="_blank" class="option">follow us on twitter!</a>
-						    <a href="http://coolendar.uservoice.com" target="_blank" class="option">give us some feedback</a>
-						    <a href="http://coolendar.uservoice.com" target="_blank" class="option">request support</a>
-						    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JLSND3G9KRLRG" target="_blank" class="option">donate</a>
-							<a href="${cp}/logout" class="option">sign out&nbsp;→</a>
-						</div>
-					</li>
-				</ul>
-			</nav>
+				<nav>
+					<ul class="options">
+						<!-- <li class="option help">
+							<a href="#" class="help" title="<i:message key="help.link.title" />"><i:message key="help" /></a>
+						</li> -->
+						<li class="option account">
+							<span>${fn:replace(account.email, "@gmail.com", "")}</span>
+							<span class="arrow">▾</span>
+							<div id="preferences-menu">
+								<p class="first">Preferences</p>
+									<a href="#preferences-date-time" id="preferences-date-time-link" rel="#preferences-date-time" class="option">date and time preferences</a>
+									<a href="#preferences-account" id="preferences-account-link" rel="#preferences-account" class="option">account preferences</a>
+									<a href="#preferences-delete-account" id="preferences-delete-account-link" rel="#preferences-delete-account" class="option">delete my account</a>
+								<p>Apps</p>
+								<a href="http://market.android.com/details?id=com.fingerson.android.coolendar" target="_blank" class="option">Android App</a>
+								<a href="http://itunes.apple.com/us/app/coolendar/id434828509?mt=8&ls=1" target="_blank" class="option">iPhone App</a>
+								<a href="gtalk:chat?jid=coolendar@appspot.com" class="option">Google Talk App</a>
+								<a href="mailto:robot@coolendar.com?subject=help" class="option">Email App</a>
+								<a href="http://kindle.coolendar.com" target="_blank" class="option">Kindle Web App</a>
+								<p>Sync</p>
+									<a href="http://www.google.com/calendar/render?cid=http%3A%2F%2Fwww.coolendar.com%2Fical%2F${account.token}.ics" target="_blank" class="option">Google Calendar</a>
+									<a href="webcal://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Apple iCal</a>
+									<a href="http://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Microsoft Oultook</a>
+									<a href="http://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Other (ICS)</a>
+								<p>Say hi!</p>
+									<a href="http://twitter.com/coolendar" target="_blank" class="option">follow us on twitter!</a>
+									<a href="http://coolendar.uservoice.com" target="_blank" class="option">give us some feedback</a>
+									<a href="http://coolendar.uservoice.com" target="_blank" class="option">request support</a>
+									<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JLSND3G9KRLRG" target="_blank" class="option">donate</a>
+								<a href="${cp}/logout" class="option">sign out&nbsp;→</a>
+							</div>
+						</li>
+					</ul>
+				</nav>
 
-		</header>
+			</header>
 
-		<section id="panel">
+			<section id="panel">
 
-			<form id="create" action="${cp}/" method="post">
-				<fieldset>
-					<button type="button" title="<i:message key="help.button.title" />">?</button>
-					<input type="hidden" name="m" value="put" />
-	   				<input type="text" id="entry" name="entry" maxlength="150" value="${param.p}" />
-					<button type="submit"><i:message key="create" /></button>
-				</fieldset>
-				<article id="preview"></article>
-				<div class="help">
-					<i:message key="help-content" />
-				</div>
-			</form>
+				<form id="create" action="${cp}/" method="post">
+					<fieldset>
+						<button type="button" title="<i:message key="help.button.title" />">?</button>
+						<input type="hidden" name="m" value="put" />
+							<input type="text" id="entry" name="entry" maxlength="150" value="${param.p}" />
+						<button type="submit"><i:message key="create" /></button>
+					</fieldset>
+					<article id="preview"></article>
+					<div class="help">
+						<i:message key="help-content" />
+					</div>
+				</form>
 
-			<nav id="filters">
-				<ul>
-					<li class="filter all<c:if test="${requestURI == '/'}"> active</c:if>"><a href="${cp}/"><i:message key="filter.all" /></a></li>
-					<li class="filter important<c:if test="${requestURI == '/starred'}"> active</c:if>"><a href="${cp}/starred">&bull;</a></li>
-					<li class="filter today<c:if test="${requestURI == '/today'}"> active</c:if>"><a href="${cp}/today"><i:message key="filter.today" /></a></li>
-					<li class="filter tomorrow<c:if test="${requestURI == '/tomorrow'}"> active</c:if>"><a href="${cp}/tomorrow"><i:message key="filter.tomorrow" /></a></li>
-					<li class="filter week<c:if test="${requestURI == '/week'}"> active</c:if>"><a href="${cp}/week"><i:message key="filter.week" /></a></li>
-					<li class="filter done<c:if test="${requestURI == '/done'}"> active</c:if>"><a href="${cp}/done"><i:message key="filter.done" /></a></li>
-					<li class="more">
-						<div></div>
-		                <ul class="sub">
-		                    <li><a href="${cp}/preferences?order=REORDER"><i:message key="sort" /></a></li>
-		                </ul>
-					</li>
-					<li class="search"><input type="text" /></li>
-				</ul>
-			</nav>
+				<nav id="filters">
+					<ul>
+						<li class="filter all<c:if test="${requestURI == '/'}"> active</c:if>"><a href="${cp}/"><i:message key="filter.all" /></a></li>
+						<li class="filter important<c:if test="${requestURI == '/starred'}"> active</c:if>"><a href="${cp}/starred">&bull;</a></li>
+						<li class="filter today<c:if test="${requestURI == '/today'}"> active</c:if>"><a href="${cp}/today"><i:message key="filter.today" /></a></li>
+						<li class="filter tomorrow<c:if test="${requestURI == '/tomorrow'}"> active</c:if>"><a href="${cp}/tomorrow"><i:message key="filter.tomorrow" /></a></li>
+						<li class="filter week<c:if test="${requestURI == '/week'}"> active</c:if>"><a href="${cp}/week"><i:message key="filter.week" /></a></li>
+						<li class="filter done<c:if test="${requestURI == '/done'}"> active</c:if>"><a href="${cp}/done"><i:message key="filter.done" /></a></li>
+						<li class="more">
+							<div></div>
+											<ul class="sub">
+													<li><a href="${cp}/preferences?order=REORDER"><i:message key="sort" /></a></li>
+											</ul>
+						</li>
+						<li class="search"><input type="text" /></li>
+					</ul>
+				</nav>
 
-			<section id="items" class="all clearfix">
+				<section id="items" class="all clearfix">
 
-				<c:forEach items="${entries}" var="entry">${entry}</c:forEach>
+					<c:forEach items="${entries}" var="entry">${entry}</c:forEach>
+
+				</section>
 
 			</section>
 
-		</section>
+			<footer class="clearfix">
+				<p>copyright &copy;2009-2011 coolendar</p>
+			</footer>
 
-		<footer class="clearfix">
-			<p>copyright &copy;2009-2011 coolendar</p>
-		</footer>
+		</div>
 
-	</div>
+		<div id="preferences-date-time" class="preferences">
+			<h2>date / time preferences</h2>
+			<form action="${cp}/preferences" method="post">
+				<input type="hidden" name="mode" value="dateTime" />
+				<i:message key="preferences.your.timezone" /> <select name="timezone"></select>
+				<i:message key="preferences.date.format" />
+				<span id="dateFormat">
+					<input type="radio" id="dateFormat1" name="dateFormat" value="dm"<c:if test="${account.preferences.dateFormatDayMonth}"> checked="checked"</c:if> /><label for="dateFormat1">31/12</label>
+					<input type="radio" id="dateFormat2" name="dateFormat" value="md"<c:if test="${account.preferences.dateFormatMonthDay}"> checked="checked"</c:if> /><label for="dateFormat2">12/31</label>
+				</span>
+				<i:message key="preferences.time.format" />
+				<span id="timeFormat">
+					<input type="radio" id="timeFormat1" name="timeFormat" value="24"<c:if test="${account.preferences.timeFormat24}"> checked="checked"</c:if> /><label for="timeFormat1">24h</label>
+					<input type="radio" id="timeFormat2" name="timeFormat" value="12"<c:if test="${account.preferences.timeFormat12}"> checked="checked"</c:if> /><label for="timeFormat2">am/pm</label>
+				</span>
+				<div class="buttons">
+					<a href="${cp}" class="cancel"><i:message key="cancel" /></a>
+					<button type="submit" class="save"><i:message key="save" /></button>
+				</div>
+			</form>
+		</div>
 
-	<div id="preferences-date-time" class="preferences">
-		<h2>date / time preferences</h2>
-		<form action="${cp}/preferences" method="post">
-			<input type="hidden" name="mode" value="dateTime" />
-			<i:message key="preferences.your.timezone" /> <select name="timezone"></select>
-			<i:message key="preferences.date.format" />
-			<span id="dateFormat">
-				<input type="radio" id="dateFormat1" name="dateFormat" value="dm"<c:if test="${account.preferences.dateFormatDayMonth}"> checked="checked"</c:if> /><label for="dateFormat1">31/12</label>
-				<input type="radio" id="dateFormat2" name="dateFormat" value="md"<c:if test="${account.preferences.dateFormatMonthDay}"> checked="checked"</c:if> /><label for="dateFormat2">12/31</label>
-			</span>
-			<i:message key="preferences.time.format" />
-			<span id="timeFormat">
-				<input type="radio" id="timeFormat1" name="timeFormat" value="24"<c:if test="${account.preferences.timeFormat24}"> checked="checked"</c:if> /><label for="timeFormat1">24h</label>
-				<input type="radio" id="timeFormat2" name="timeFormat" value="12"<c:if test="${account.preferences.timeFormat12}"> checked="checked"</c:if> /><label for="timeFormat2">am/pm</label>
-			</span>
-			<div class="buttons">
-				<a href="${cp}" class="cancel"><i:message key="cancel" /></a>
-				<button type="submit" class="save"><i:message key="save" /></button>
-			</div>
+		<div id="preferences-account" class="preferences">
+			<h2>account preferences</h2>
+			<form action="${cp}/preferences" method="post">
+				<input type="hidden" name="mode" value="account" />
+				<input id="alertByEmail" name="alertByEmail" type="checkbox"<c:if test="${account.preferences.alerts.alertByEmail}"> checked="checked"</c:if> /><label for="alertByEmail">notify by email</label>
+				<input id="alertByGtalk" name="alertByGtalk" type="checkbox"<c:if test="${account.preferences.alerts.alertByGtalk}"> checked="checked"</c:if> /><label for="alertByGtalk">notify by gtalk</label>
+				<div class="buttons">
+					<a href="${cp}" class="cancel"><i:message key="cancel" /></a>
+					<button type="submit" class="save"><i:message key="save" /></button>
+				</div>
+			</form>
+		</div>
+
+		<div id="preferences-delete-account" class="preferences">
+			<h2>delete my account</h2>
+			<form action="${cp}/preferences" method="get">
+				<input type="hidden" name="m" value="delete" />
+				<span>
+					this will <strong>delete your account and all your plans</strong>. if you are really sure about that type <strong>yes</strong> here:
+				</span>
+				<input type="text" name="confirmation" placeholder="no" class="delete-confirmation" />
+				<div class="buttons">
+					<a href="${cp}" class="cancel"><i:message key="cancel" /></a>
+					<button type="submit" class="save">delete my account</button>
+				</div>
+			</form>
+		</div>
+
+		<form id="update" action="${cp}/" method="post" class="update">
+			<fieldset>
+				<input type="hidden" name="id" value="" />
+				<input type="text" id="entry" name="entry" maxlength="150" value="" />
+			</fieldset>
+			<a href="#" class="cancel">cancel</a>
+			<button type="submit">save</button>
 		</form>
-	</div>
 
-	<div id="preferences-account" class="preferences">
-		<h2>account preferences</h2>
-		<form action="${cp}/preferences" method="post">
-			<input type="hidden" name="mode" value="account" />
-			<input id="alertByEmail" name="alertByEmail" type="checkbox"<c:if test="${account.preferences.alerts.alertByEmail}"> checked="checked"</c:if> /><label for="alertByEmail">notify by email</label>
-			<input id="alertByGtalk" name="alertByGtalk" type="checkbox"<c:if test="${account.preferences.alerts.alertByGtalk}"> checked="checked"</c:if> /><label for="alertByGtalk">notify by gtalk</label>
-			<div class="buttons">
-				<a href="${cp}" class="cancel"><i:message key="cancel" /></a>
-				<button type="submit" class="save"><i:message key="save" /></button>
-			</div>
-		</form>
-	</div>
+		<div id="notification-container">
+				<div id="basic-template">
+						<h1>!{title}</h1>
+				</div>
+				<div id="advanced-template">
+						<h1>!{title}</h1>
+						<p>!{text}</p>
+				</div>
+		</div>
 
-	<div id="preferences-delete-account" class="preferences">
-		<h2>delete my account</h2>
-		<form action="${cp}/preferences" method="get">
-			<input type="hidden" name="m" value="delete" />
-			<span>
-				this will <strong>delete your account and all your plans</strong>. if you are really sure about that type <strong>yes</strong> here:
-			</span>
-			<input type="text" name="confirmation" placeholder="no" class="delete-confirmation" />
-			<div class="buttons">
-				<a href="${cp}" class="cancel"><i:message key="cancel" /></a>
-				<button type="submit" class="save">delete my account</button>
-			</div>
-		</form>
-	</div>
-
-	<form id="update" action="${cp}/" method="post" class="update">
-		<fieldset>
-			<input type="hidden" name="id" value="" />
-			<input type="text" id="entry" name="entry" maxlength="150" value="" />
-		</fieldset>
-		<a href="#" class="cancel">cancel</a>
-		<button type="submit">save</button>
-	</form>
-
-	<div id="notification-container">
-	    <div id="basic-template">
-	        <h1>!{title}</h1>
-	    </div>
-	    <div id="advanced-template">
-	        <h1>!{title}</h1>
-	        <p>!{text}</p>
-	    </div>
-	</div>
-
-	<!--[if lt IE 7 ]>
-		<script src="${cp}/js/dd_belatedpng.js"></script>
-		<script>DD_belatedPNG.fix('img, .png_bg');</script>
-	<![endif]-->
-
-</body>
+		<script src="node_modules/todomvc-common/base.js"></script>
+		<script src="node_modules/jquery/dist/jquery.js"></script>
+		<script src="node_modules/handlebars/dist/handlebars.js"></script>
+		<script src="node_modules/director/build/director.js"></script>
+		<script src="js/app.js"></script>
+	</body>
 
 </html>
