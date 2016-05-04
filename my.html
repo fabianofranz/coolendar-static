@@ -55,10 +55,10 @@
 				<h1>coolendar</h1>
 
 				<time id="clock">
-					<span class="date">${u:formatDate(now, 'MMMM dd', account.preferences.timezone)}</span>,
-					<span class="time">${u:lowerCase(u:formatDate(now, account.preferences.timeFormat, account.preferences.timezone))}</span>
+					<span class="date">01/01/1979</span>,
+					<span class="time">23:59</span>
 					<br />
-					<span class="timezone">${u:userFriendlyTimezone(account.preferences.timezone)}</span>
+					<span class="timezone">America/Sao Paulo</span>
 				</time>
 
 				<nav>
@@ -67,7 +67,7 @@
 							<a href="#" class="help" title="<i:message key="help.link.title" />"><i:message key="help" /></a>
 						</li> -->
 						<li class="option account">
-							<span>${fn:replace(account.email, "@gmail.com", "")}</span>
+							<span>username</span>
 							<span class="arrow">▾</span>
 							<div id="preferences-menu">
 								<p class="first">Preferences</p>
@@ -82,15 +82,15 @@
 								<a href="http://kindle.coolendar.com" target="_blank" class="option">Kindle Web App</a>
 								<p>Sync</p>
 									<a href="http://www.google.com/calendar/render?cid=http%3A%2F%2Fwww.coolendar.com%2Fical%2F${account.token}.ics" target="_blank" class="option">Google Calendar</a>
-									<a href="webcal://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Apple iCal</a>
-									<a href="http://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Microsoft Oultook</a>
-									<a href="http://www.coolendar.com/ical/${account.token}.ics" target="_blank" class="option">Other (ICS)</a>
+									<a href="webcal://www.coolendar.com/ical/{{account.token}}.ics" target="_blank" class="option">Apple iCal</a>
+									<a href="http://www.coolendar.com/ical/{{account.token}}.ics" target="_blank" class="option">Microsoft Oultook</a>
+									<a href="http://www.coolendar.com/ical/{{account.token}}.ics" target="_blank" class="option">Other (ICS)</a>
 								<p>Say hi!</p>
 									<a href="http://twitter.com/coolendar" target="_blank" class="option">follow us on twitter!</a>
 									<a href="http://coolendar.uservoice.com" target="_blank" class="option">give us some feedback</a>
 									<a href="http://coolendar.uservoice.com" target="_blank" class="option">request support</a>
 									<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JLSND3G9KRLRG" target="_blank" class="option">donate</a>
-								<a href="${cp}/logout" class="option">sign out&nbsp;→</a>
+								<a href="#logout" class="option">sign out&nbsp;→</a>
 							</div>
 						</li>
 					</ul>
@@ -100,32 +100,32 @@
 
 			<section id="panel">
 
-				<form id="create" action="${cp}/" method="post">
+				<form id="create" action="/" method="post">
 					<fieldset>
-						<button type="button" title="<i:message key="help.button.title" />">?</button>
+						<button type="button">?</button>
 						<input type="hidden" name="m" value="put" />
-							<input type="text" id="entry" name="entry" maxlength="150" value="${param.p}" />
-						<button type="submit"><i:message key="create" /></button>
+						<input type="text" id="entry" name="entry" maxlength="150" value="" />
+						<button type="submit">plan!</button>
 					</fieldset>
 					<article id="preview"></article>
 					<div class="help">
-						<i:message key="help-content" />
+						empty
 					</div>
 				</form>
 
 				<nav id="filters">
 					<ul>
-						<li class="filter all<c:if test="${requestURI == '/'}"> active</c:if>"><a href="${cp}/"><i:message key="filter.all" /></a></li>
-						<li class="filter important<c:if test="${requestURI == '/starred'}"> active</c:if>"><a href="${cp}/starred">&bull;</a></li>
-						<li class="filter today<c:if test="${requestURI == '/today'}"> active</c:if>"><a href="${cp}/today"><i:message key="filter.today" /></a></li>
-						<li class="filter tomorrow<c:if test="${requestURI == '/tomorrow'}"> active</c:if>"><a href="${cp}/tomorrow"><i:message key="filter.tomorrow" /></a></li>
-						<li class="filter week<c:if test="${requestURI == '/week'}"> active</c:if>"><a href="${cp}/week"><i:message key="filter.week" /></a></li>
-						<li class="filter done<c:if test="${requestURI == '/done'}"> active</c:if>"><a href="${cp}/done"><i:message key="filter.done" /></a></li>
+						<li class="filter all active"><a href="#">all plans</a></li>
+						<li class="filter important"><a href="#starred">&bull;</a></li>
+						<li class="filter today"><a href="#today">today</a></li>
+						<li class="filter tomorrow"><a href="#tomorrow">tomorrow</a></li>
+						<li class="filter week"><a href="#week">week</a></li>
+						<li class="filter done"><a href="#done">done</a></li>
 						<li class="more">
 							<div></div>
-											<ul class="sub">
-													<li><a href="${cp}/preferences?order=REORDER"><i:message key="sort" /></a></li>
-											</ul>
+							<ul class="sub">
+									<li><a href="#preferences?order=REORDER">sort</a></li>
+							</ul>
 						</li>
 						<li class="search"><input type="text" /></li>
 					</ul>
@@ -195,7 +195,7 @@
 			</form>
 		</div>
 
-		<form id="update" action="${cp}/" method="post" class="update">
+		<form id="update" action="/" method="post" class="update">
 			<fieldset>
 				<input type="hidden" name="id" value="" />
 				<input type="text" id="entry" name="entry" maxlength="150" value="" />
