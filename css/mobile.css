@@ -1,0 +1,21 @@
+.ui-page { background: #b2c2d9 url(../images/bg.jpg); }
+.ui-bar-c {
+	background-image: -moz-linear-gradient(top, #f0f0f0, #ddddd7);
+	background-image: -webkit-gradient(linear,left top,left bottom, color-stop(0, #f0f0f0), color-stop(1, #ddddd7));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#f0f0f0', EndColorStr='#ddddd7')"; 
+	border-bottom: 1px solid #bbb; 
+	color: #888;
+    font-weight: bold;
+	text-shadow: white 0px 1px 0px;
+}
+.relevance { color: #bbb; display: inline; margin-right: 5px; }
+.important div.relevance { color: red; }
+.footer { text-align: center; font-size: 80%; }
+.center { text-align: center; }
+.call { font-size: 130%; }
+
+div#login { margin-top: 20px; }
+div#login a.login { font-weight: normal; }
+div#login a.login img { float: left; margin: 6px 7px 3px 3px; }
+div#login a.login span.in { display: block; font-weight: bold; font-size: 160%; }
+div#login a.login span.google { font-weight: bold; }

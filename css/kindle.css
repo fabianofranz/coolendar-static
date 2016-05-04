@@ -1,0 +1,106 @@
+body {
+	font-family: sans-serif;
+}
+body, a, button, div, p {
+	font-size: medium;
+	color: black;
+}
+a {
+	text-decoration: none;
+}
+.section {
+	clear: both;
+	width: 550px;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+#header {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+#title {
+	font-size: xx-large;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+	font-weight: bold;
+	float: left;  
+}
+.login, .logout {
+	text-decoration: underline;
+	font-size: small;
+}
+#account {
+	font-size: small;
+	float: right;  
+}
+#date {
+	position: relative;
+	float: right;  
+	font-size: small;
+}
+#form {
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+#description {
+	padding-top: 30px;
+	margin-bottom: 20px;
+	clear: both;
+}
+#description p {
+	margin-bottom: 10px;
+}
+#login {
+	margin-top: 20px;
+	margin-bottom: 40px;
+	clear: both;
+	text-align: center;
+}
+#login a {
+	font-weight: bold;
+	text-decoration: underline;
+	font-size: large;
+}
+input {
+	padding: 5px 0; 
+	width: 490px; 
+	display: inline;
+}
+.submit { 
+	float: right;
+	font-weight: bold;
+	text-decoration: underline;
+}
+#filters {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	clear: both;
+}
+.filter {
+	display: inline;	
+}
+.filter a {
+	text-decoration: none;
+}
+.active {
+	font-weight: bold;	
+}
+.active a {
+	text-decoration: underline;
+}
+.entry {
+	margin-bottom: 15px;
+}
+.actions a {
+	font-size: small;
+}
+.datetime { 
+	font-weight: bold;
+	display: inline;
+}
+#footer {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	text-align: center;
+}

@@ -1,0 +1,194 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@ taglib prefix="i" uri="http://java.sun.com/jsp/jstl/fmt" %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %><%@ taglib prefix="u" uri="/WEB-INF/tld/utils.tld" %><%@ page isELIgnored="false" %>
+<!doctype html>
+
+<!--[if lt IE 7 ]><html lang="en" class="ie ie6"><![endif]-->
+<!--[if IE 7 ]><html lang="en" class="ie ie7"><![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+
+<head>
+
+	<title>coolendar</title>
+	<meta charset="utf-8" />
+    <meta name="description" content="<i:message key="meta.description" />" />
+	<meta name="author" content="Fabiano Franz" />
+	
+	<meta property="og:title" content="Coolendar: a brand new planning experience" />
+    <meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Coolendar.com" />
+    <meta property="og:description" content="<i:message key="meta.description" />" />
+    <meta property="og:image" content="http://www.coolendar.com/images/screenshot.jpg" />
+	<meta property="og:url" content="http://coolendar.com" />
+	<meta property="og:audio" content="http://www.coolendar.com/audio/fiene-podcast.mp3" />
+	<meta property="og:audio:title" content="Daniel Fiene talks about Coolendar at the 150 Questions Podcast" />
+	<meta property="og:audio:type" content="application/mp3" />
+	<meta property="fb:admins" content="566724777" />
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="cleartype" content="on" />
+	<meta name="HandheldFriendly" content="True" />
+	<meta name="MobileOptimized" content="320" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+  
+	<link rel="shortcut icon" xhref="${cp}/favicon.ico" type="image/x-icon" />
+	
+	<link rel="apple-touch-icon" href="${cp}/images/apple-touch-icon-high-res.png" />
+	<link rel="apple-touch-icon-precomposed" media="screen and (min-resolution: 150dpi)" href="${cp}/images/apple-touch-icon-high-res.png" />
+	<link rel="apple-touch-icon-precomposed" media="screen and (max-resolution: 80dpi)" href="${cp}/images/apple-touch-icon-low-res.png" />
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<link rel="apple-touch-startup-image" href="${cp}/images/splash.png" />
+	
+	<%@ include file="../css-minified.jsp" %>
+	
+	<link rel="prefetch" href="${cp}/images/bg.png" />
+	<link rel="prefetch" href="${cp}/images/overlay1.png" />
+	<link rel="prefetch" href="${cp}/images/input_bg.png" />
+	<link rel="prefetch" href="${cp}/images/ajax-loader-5.gif" />
+	<link rel="prefetch" href="${cp}/images/ajax-loader-6.gif" />
+	
+	<script type="text/javascript">
+		var cp = "${cp}";
+	</script>
+	<%@ include file="../js-minified.jsp" %>
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+</head>
+
+<body class="home">
+
+	<section id="panel">
+	
+		<section id="banner">
+			<div id="slogan">
+				<img src="${cp}/images/umbrella/128x128.png" alt="never forget your umbrella again!" />
+				<h1>coolendar</h1>
+				<p>a new <i>planning</i> experience. available <i>everywhere</i>.</p>
+			</div>
+			<div id="login">
+				<a class="appstore" href="http://market.android.com/details?id=com.fingerson.android.coolendar" target="_blank"><img style="width:120px;" src="${cp}/images/android_badge.png" alt="Available in Android Market" /></a>
+				<a class="appstore" href="http://itunes.apple.com/us/app/coolendar/id434828509?mt=8&ls=1" target="_blank"><img style="width:122px;" src="${cp}/images/app_store_badge.png" alt="Available in iPhone App Store" /></a>
+				<a class="button login" href="${cp}/login<c:if test="${param.p != null}">?p=${u:encode(param.p, 'UTF-8')}</c:if>"><img src="${cp}/images/google.png" /><span class="in">sign in</span> with your <span class="google">Google</span> account</a>
+			</div>
+		</section>
+
+				
+		<section id="features">
+		
+			<section id="details">
+			
+				<p class="title">coolendar is not only calendar or task app: it's a whole new <i>planning</i> experience</p>
+				
+				<section id="devices">
+					<div id="screenshot">
+						<img class="screenshot-iphone" src="${cp}/images/screenshot-v2-iphone.png" alt="coolendar for iphone" />
+						<img class="screenshot-laptop" src="${cp}/images/screenshot-v2-laptop.png" alt="coolendar for web" />
+						<img class="screenshot-kindle" src="${cp}/images/screenshot-v2-kindle.png" alt="coolendar for kindle" />
+					</div>
+				</section>
+				
+				<div class="feature description">
+					We believe it is time for a new level of <strong>planning</strong> software. Something <strong>simple</strong> that <strong>works for you</strong>, without the noise of handling a calendar or tasks app.
+				</div>
+<!-- 				<div class="feature sharing"> -->
+<!-- 					<a href="http://www.twitter.com/coolendar" target="_blank"><img src="http://twitter-badges.s3.amazonaws.com/t_logo-a.png" alt="Follow coolendar on Twitter"/></a> -->
+<!-- 				</div> -->
+				
+				<p>
+					<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fcoolendardotcom&amp;width=900&amp;colorscheme=light&amp;show_faces=true&amp;border_color=%23ffffff&amp;stream=false&amp;header=false&amp;height=260" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:900px; height:260px;" allowTransparency="true"></iframe>
+				</p>
+				
+				<p class="title">why is this different?</p>
+				
+				<div class="feature">
+					<img src="${cp}/images/calendar.png" />
+					Instead of these overhead matrix-like calendar views, now you have a <strong>simple list</strong> of your planning entries. That's all you need, you will know why.
+				</div>
+				<div class="feature">
+					<img src="${cp}/images/blog_compose.png" />
+					Use custom <strong>#tags</strong> to get organized. Create group plans in a <strong>social way</strong> together with your <strong>@buddies</strong>.
+				</div>
+				<div class="feature">
+					<img src="${cp}/images/clock.png" />
+					Efficient, error-proof and multiple <strong>alerts</strong> to find you wherever you are (e-mail, messenger, web, desktop, mobile, twitter).
+				</div>
+				<div class="feature">
+					<img src="${cp}/images/button_blue_last.png" />
+					<strong>No more recurrence</strong> in your life: when you get notified about a planned event, you decide if you need to reschedule it or not. With one click.
+				</div>
+				<div class="feature">
+					<img src="${cp}/images/battery_full.png" />
+					<strong>Forget durations</strong>: it's a poison concept and doesn't allow you to be concise and consistent. You just don't need it.
+				</div>
+				<div class="feature">
+					<img src="${cp}/images/comment_edit.png" />
+					<strong>Smooth</strong>: just tell your coolendar when (date and time) and what, in human language. It will be understood, don't worry. Example:<br /><a href="${cp}/login?p=tomorrow%208am%20make%20sure%20to%20grab%20the%20%23umbrella!">tomorrow 8am make sure to grab the #umbrella!</a>
+				</div>
+				
+				<p class="title">coolendar is available everywhere.</p>
+				
+				<div class="feature">
+					<p class="topic">Coolendar Web</p>
+					This one. The most complete planning experience. Just point a modern browser to <a href="http://coolendar.com">coolendar.com</a> and login with your Google Account. HTML5 and CSS3 guaranteed.
+				</div>
+				<div class="feature">
+					<p class="topic">Coolendar Mobile</p>
+					Our beautiful <strong><a class="appstore" href="http://itunes.apple.com/us/app/coolendar/id434828509?mt=8&ls=1" target="_blank">iPhone</a></strong> and <strong><a href="http://market.android.com/details?id=com.fingerson.android.coolendar" target="_blank" class="appstore">Android</a></strong> native apps are available. For other mobile OS, go to <a href="http://coolendar.com">coolendar.com</a> or <a href="http://m.coolendar.com">m.coolendar.com</a> to get Coolendar right on your hand.					
+				</div>
+				<div class="feature">
+					<p class="topic">Coolendar for Amazon Kindle&trade;</p>
+					That's right: we have an optimized version well suitable for your lovely <a href="http://amazon.com/kindle" target="_blank">Amazon Kindle&trade;</a> with network capabilities. Point its browser to <a href="http://coolendar.com">coolendar.com</a> or go to <a href="http://kindle.coolendar.com">kindle.coolendar.com</a> if you are curious.
+				</div>
+				<div class="feature">
+					<p class="topic">Coolendar for Google Talk</p>
+					If you use Google Talk, invite <a href="gtalk:chat?jid=coolendar@appspot.com">coolendar@appspot.com</a> and say <i>help</i>. We provide you a complete Coolendar experience right on your IM client. Coolendar for Google Talk will also remind you about your plans.  
+				</div>
+				<div class="feature">
+					<p class="topic">Coolendar for Email</p>
+					Coolendar right from your email. Just send a message to <a href="mailto:robot@coolendar.com?subject=help">robot@coolendar.com</a> with <i>help</i> as the subject. Just remember to use an email with a valid Google account, so you can login later. 
+				</div>
+				<div class="feature">
+					<p class="topic">Coolendar Where Else? You decide.</p>
+					We are delivering new Coolendar integrations every time. For example, we currently working on <strong>Coolendar Paper</strong> and <strong>Twitter</strong> apps. <a href="http://coolendar.uservoice.com" target="_blank">Where else would you like to use it?</a>! 
+				</div>
+				
+				<p><a href="${cp}/login<c:if test="${param.p != null}">?p=${u:encode(param.p, 'UTF-8')}</c:if>" class="button login">start now!</a></p>
+				
+			</section>
+		</section>
+
+	</section>
+	
+	<script type="text/javascript">
+		adjustLoginLink();
+	</script>
+
+	<footer>
+		<p>copyright &copy;2009-2011 coolendar</p>
+		<p>keep in touch by <a href="http://twitter.com/coolendar" target="_blank">following us on twitter</a> and <a href="http://coolendar.uservoice.com" target="_blank">giving your feedback</a>. you can help with money by <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JLSND3G9KRLRG" target="_blank">donating</a>.</p>
+		<p><a href="${cp}/html/tos.html" target="_blank" class="tos" rel="nofollow">terms of service</a> &bull; <a href="${cp}/html/privacy.html" target="_blank" class="privacy" rel="nofollow">privacy policy</a> &bull; <a href="mailto:contact@coolendar.com">contact us</a></p>
+		<p>coolendar is proudly developed by <span class="vcard"><a href="http://twitter.com/fabianofranz" target="_blank" class="fn">fabiano franz</a></span> at the beautiful island of <a href="http://bit.ly/hnT4sH" target="_blank">florian&oacute;polis</a>, brazil</p>
+	</footer>
+	
+	<!--[if lt IE 7 ]>
+		<script src="${cp}/js/dd_belatedpng.js"></script>
+		<script>DD_belatedPNG.fix('img, .png_bg');</script>
+	<![endif]-->
+	
+	<script type="text/javascript">
+		var _gaq = [['_setAccount', 'UA-597583-7'], ['_trackPageview']];
+		(function(d, t) {
+			var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+			g.async = true;
+			g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g, s);
+		})(document, 'script');
+	</script>
+
+</body>
+
+</html>

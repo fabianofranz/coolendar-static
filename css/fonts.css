@@ -1,0 +1,6 @@
+@font-face {
+	font-family: "IconicStroke";
+    src: url("../fonts/iconic_stroke.eot");
+	src: local("IconicStroke"), url("../fonts/iconic_stroke.otf") format("opentype"), url("../fonts/iconic_stroke.ttf") format("truetype");
+	/**src: local("IconicStroke"), url("../fonts/iconic_stroke.svg#iconic") format("svg"), url("../fonts/iconic_stroke.otf") format("opentype"), url("../fonts/iconic_stroke.ttf") format("truetype");**/
+}
